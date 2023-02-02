@@ -32,58 +32,75 @@ let closeBtn = document.querySelector('#closeBtn')
 let startBtn = document.getElementById('startBtn')
 let popupWindow = document.getElementById('popup')
 let gameBoard = document.getElementById('gameBoard')
+let name1 = document.getElementById('name1')
+let name2 = document.getElementById('name2')
 let player1 = "red"
 let player2 = 'yellow'
 let currentPlayer
 let gameOver = false
 let cellsArr = []
-let lastRowArr = [5,5,5,5,5,5,5]
+let lastRowArr = [5, 5, 5, 5, 5, 5, 5]
 
 
 
 window.onload = startGame;
 
 currentPlayer = player1
+name1.classList.add('glowing-circle')
 
-function startGame(){
-//Create two dimen. array[][] to the board
-for (let row = 0; row < 6; row++) {
-    let rowCells = [];
-    for (let col = 0; col < 7; col++) {
-        rowCells.push(' ')
-        const colCells = document.createElement('div')
-        colCells.classList.add('circle')
-        colCells.setAttribute('id', row + "-" + col)
-        colCells.addEventListener('click', handleClick)
-        container.appendChild(colCells)
+
+function startGame() {
+
+    popupWindow.style.display = 'block';
+    gameBoard.style.display = 'none'
+    resultMessage.style.display = 'none'
+    player1Name.value = '';
+    player2Name.value = '';
+
+    //Create two dimen. array[][] to the board
+    for (let row = 0; row < 6; row++) {
+        let rowCells = [];
+        for (let col = 0; col < 7; col++) {
+            rowCells.push(' ')
+            const colCells = document.createElement('div')
+            colCells.classList.add('circle')
+            colCells.setAttribute('id', row + "-" + col)
+            colCells.addEventListener('click', handleClick)
+            container.appendChild(colCells)
+        }
+        cellsArr.push(rowCells)
     }
-    cellsArr.push(rowCells)
-}
 }
 console.log(cellsArr)
+
+
 //onclick() save the column index of the target element
 function handleClick(e) {
-    if(gameOver){
+    if (gameOver) {
         return
     }
 
-    let coord = e.target.id.split('-') 
+    let coord = e.target.id.split('-')
     let rowIndex = parseInt(coord[0])
     let colIndex = parseInt(coord[1])
 
     rowIndex = lastRowArr[colIndex]
 
-    if(rowIndex < 0){
+    if (rowIndex < 0) {
         return
     }
     cellsArr[rowIndex][colIndex] = currentPlayer
     let disc = document.getElementById(rowIndex.toString() + '-' + colIndex.toString())
-    if(currentPlayer === player1){
+    if (currentPlayer === player1) {
         disc.classList.add('red')
         currentPlayer = player2
-    }else{
+        name2.classList.add('glowing-circle')
+        name1.classList.remove('glowing-circle')
+    } else {
         disc.classList.add('yellow')
         currentPlayer = player1
+        name1.classList.add('glowing-circle')
+        name2.classList.remove('glowing-circle')
     }
     rowIndex -= 1
     lastRowArr[colIndex] = rowIndex
@@ -109,76 +126,78 @@ function handleClick(e) {
 function checkWinner() {
     //check all horisontal lines
     for (let i = 0; i < 6; i++) {
-         for (let j = 0; j < 4; j++) {
-            if (cellsArr[i][j] !== " "){
-                if(cellsArr[i][j] ===  cellsArr[i][j+1] &&
-                    cellsArr[i][j+1] === cellsArr[i][j+2] &&
-                    cellsArr[i][j+2] === cellsArr[i][j+3]
-                    ){
-                       setWinner(i, j)
-                       return
-                    }                
-            }          
+        for (let j = 0; j < 4; j++) {
+            if (cellsArr[i][j] !== " ") {
+                if (cellsArr[i][j] === cellsArr[i][j + 1] &&
+                    cellsArr[i][j + 1] === cellsArr[i][j + 2] &&
+                    cellsArr[i][j + 2] === cellsArr[i][j + 3]
+                ) {
+                    setWinner(i, j)
+                    return
+                }
+            }
         }
     }
-    
-//check all horisontal lines
-for (let i = 0; i < 6; i++) {
-    for (let j = 0; j < 4; j++) {
-       if (cellsArr[i][j] !== " "){
-           if(cellsArr[i][j] ===  cellsArr[i+1][j] &&
-               cellsArr[i+1][j] === cellsArr[i+2][j] &&
-               cellsArr[i+2][j] === cellsArr[i+3][j]
-               ){
-                  setWinner(i, j)
-                  return
-               }                
-       }          
-   }
-}
 
-//check all  diagonal lines
-for (let i = 3; i < 3; i++) {
-    for (let j = 0; j < 3; j++) {
-       if (cellsArr[i][j] !== " "){
-           if(cellsArr[i][j] ===  cellsArr[i-1][j+1] &&
-               cellsArr[i-1][j+1] === cellsArr[i-2][j+2] &&
-               cellsArr[i-2][j+2] === cellsArr[i-3][j+3]
-               ){
-                  setWinner(i, j)
-                  return
-               }                
-       }          
-   }
-}
-
-//check all opposite diagonal lines
-for (let i = 0; i < 3; i++) {
-    for (let j = 0; j < 4; j++) {
-       if (cellsArr[i][j] !== " "){
-           if(cellsArr[i][j] ===  cellsArr[i+1][j+1] &&
-               cellsArr[i+1][j+1] === cellsArr[i+2][j+2] &&
-               cellsArr[i+2][j+2] === cellsArr[i+3][j+3]
-               ){
-                  setWinner(i, j)
-                  return
-               }                
-       }          
-   }
-}
-
-
-
-}
-
-    function setWinner(i, j){
-        if(cellsArr[i][j] === player1){
-            results.innerHTML = "Red Wins!";
-        }else {
-            results.innerHTML = "Yellow Wins!";
+    //check all vertical lines
+    for (let j = 0; j < 7; j++) {
+        for (let i = 0; i < 4; i++) {
+            if (cellsArr[i][j] !== " ") {
+                if (cellsArr[i][j] === cellsArr[i + 1][j] &&
+                    cellsArr[i + 1][j] === cellsArr[i + 2][j] &&
+                    cellsArr[i + 2][j] === cellsArr[i + 3][j]
+                ) {
+                    setWinner(i, j)
+                    return
+                }
+            }
         }
-        gameOver = true;
     }
+
+    //check all  diagonal lines
+    for (let i = 3; i < 6; i++) {
+        for (let j = 0; j < 4; j++) {
+            if (cellsArr[i][j] !== " ") {
+                if (cellsArr[i][j] === cellsArr[i - 1][j + 1] &&
+                    cellsArr[i - 1][j + 1] === cellsArr[i - 2][j + 2] &&
+                    cellsArr[i - 2][j + 2] === cellsArr[i - 3][j + 3]
+                ) {
+                    setWinner(i, j)
+                    return
+                }
+            }
+        }
+    }
+
+    //check all opposite diagonal lines
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 4; j++) {
+            if (cellsArr[i][j] !== " ") {
+                if (cellsArr[i][j] === cellsArr[i + 1][j + 1] &&
+                    cellsArr[i + 1][j + 1] === cellsArr[i + 2][j + 2] &&
+                    cellsArr[i + 2][j + 2] === cellsArr[i + 3][j + 3]
+                ) {
+                    setWinner(i, j)
+                    return
+                }
+            }
+        }
+    }
+
+
+
+}
+
+function setWinner(i, j) {
+    if (cellsArr[i][j] === player1) {
+        results.innerHTML = "Red Wins!";
+    } else {
+        results.innerHTML = "Yellow Wins!";
+    }
+    gameOver = true;
+    name2.classList.remove('glowing-circle')
+    name1.classList.remove('glowing-circle')
+}
 
 
 
@@ -195,19 +214,19 @@ for (let i = 0; i < 3; i++) {
 
 //window.onload = showGameBoard;
 
-// startBtn.addEventListener('click', function () {
-//     if (playerXName.value == '' || playerOName.value == '') {
-//         document.getElementById('errors').innerHTML = "*Input can not be left blank*";
-//     } else {
-//         popupWindow.style.display = "none";
-//         resultMessage.style.display = 'none';
-//         gameBoard.style.display = 'block';
-//         document.querySelector('#name1').innerHTML = playerXName.value;
-//         document.querySelector('#name2').innerHTML = playerOName.value;
+startBtn.addEventListener('click', function () {
+    if (player1Name.value == '' || player2Name.value == '') {
+        document.getElementById('errors').innerHTML = "*Input can not be left blank*";
+    } else {
+        popupWindow.style.display = "none";
+        resultMessage.style.display = 'none';
+        gameBoard.style.display = 'block';
+        document.querySelector('#name1').innerHTML = player1Name.value.toUpperCase();
+        document.querySelector('#name2').innerHTML = player2Name.value.toUpperCase();
 
 
-//     }
-// })
+    }
+})
 
 
 
@@ -234,9 +253,9 @@ for (let i = 0; i < 3; i++) {
 
 
 
-// restartBtn.addEventListener('click', function () {
-//     showPopup();
-// })
+restartBtn.addEventListener('click', function () {
+    location.reload()
+})
 
 closeBtn.addEventListener('click', function () {
     gameBoard.style.display = 'block'
@@ -246,12 +265,12 @@ closeBtn.addEventListener('click', function () {
 resetBtn.addEventListener('click', function () {
     popupWindow.style.display = 'none'
     gameBoard.style.display = 'block'
-  results.innerHTML = ''
+    results.innerHTML = ''
 
-    for(let i = 0; i < 6; i++){
-        for(let j = 0; j<7; j++){
+    for (let i = 0; i < 6; i++) {
+        for (let j = 0; j < 7; j++) {
             let disc = document.getElementById(i.toString() + '-' + j.toString())
-            disc.classList.remove('red','yellow')
+            disc.classList.remove('red', 'yellow')
         }
     }
 })
