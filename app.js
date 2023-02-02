@@ -1,25 +1,25 @@
 // Rules of the Game
-
-// The game is to be played between two people.
-// One of the player chooses ‘O’ and the other ‘X’ to mark their respective cells.
-// The game starts with one of the players and the game ends when one of the players 
-//has one whole row/ column/ diagonal filled with character (‘O’ or ‘X’).
+//Connect Four is a two-player connecting board game in which players choose 
+//a color and take turns placing colored discs in a seven-player column. 
+//To win Connect Four, you have to be the first player to get four of your 
+//colored checkers in a line either horizontally, vertically, or diagonally.
 
 // Pseudo code
 
-//create a board 3 x 3
-// create classes for X and O
-//onclick() 
-//check if cell doesn't has classname X or O already
-//add X or O inside the cell if has no classname
-//if occupied prompt msg NOT allowed
-// switch turns: if current player turn is X, switch the currentPlayer Turn to O after X onclick()
-//count X, if count is 3 and if it is in one row/column/diagonal RESULTS msg Player1 win
-//else if count is 3 and if it is in one row/column/diagonal RESULTS msg Player2 win
+//create a board 6 x 7
+// create classes for red and yellow
+//eventListener onclick() function for the target element
+// function to save column index of the target 
+//function to check if last row cell doesn't has classname already
+// function to assign the color to the last row(bottom) of the column
+//count red classes, if count is 4 and if it is in one row/column/diagonal RESULTS msg Player1 win
+//else if count is 4 for yellow classes and if it is in one row/column/diagonal RESULTS msg Player2 win
 //else promt "TIE"
-//restart btn ---> to start the game with clean cells
+//reset btn ---> to start the game with clean cells
 
 
+
+//create variables 
 let playerXName = document.getElementById('playerXName')
 let playerOName = document.getElementById('playerOName')
 let errors = document.querySelector('.errors')
@@ -32,66 +32,153 @@ let closeBtn = document.querySelector('#closeBtn')
 let startBtn = document.getElementById('startBtn')
 let popupWindow = document.getElementById('popup')
 let gameBoard = document.getElementById('gameBoard')
-let player1Turn
-let cellsArr = [
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0]
-]
+let player1 = "red"
+let player2 = 'yellow'
+let currentPlayer
+let gameOver = false
+let cellsArr = []
+let lastRowArr = [5,5,5,5,5,5,5]
 
 
+
+window.onload = startGame;
+
+currentPlayer = player1
+
+function startGame(){
+//Create two dimen. array[][] to the board
 for (let row = 0; row < 6; row++) {
-    const rowCells = document.createElement('div')
-    rowCells.classList.add('row')
-    rowCells.setAttribute('id', row)
+    let rowCells = [];
     for (let col = 0; col < 7; col++) {
-        cellsArr[row][col] = 'test'
+        rowCells.push(' ')
         const colCells = document.createElement('div')
         colCells.classList.add('circle')
-        colCells.setAttribute('id', row)
+        colCells.setAttribute('id', row + "-" + col)
         colCells.addEventListener('click', handleClick)
-        rowCells.appendChild(colCells)
+        container.appendChild(colCells)
     }
-    container.appendChild(rowCells)
+    cellsArr.push(rowCells)
 }
-
-player1Turn = true
+}
+console.log(cellsArr)
+//onclick() save the column index of the target element
 function handleClick(e) {
-   
-    const targetCell = e.target
-    if (player1Turn) {
-        targetCell.classList.add('red')
-        player1Turn = false;
-    } else {
-        targetCell.classList.add('yellow')
-        player1Turn = true;
+    if(gameOver){
+        return
     }
-    checkWinner('red')
-    checkWinner('yellow')
+
+    let coord = e.target.id.split('-') 
+    let rowIndex = parseInt(coord[0])
+    let colIndex = parseInt(coord[1])
+
+    rowIndex = lastRowArr[colIndex]
+
+    if(rowIndex < 0){
+        return
+    }
+    cellsArr[rowIndex][colIndex] = currentPlayer
+    let disc = document.getElementById(rowIndex.toString() + '-' + colIndex.toString())
+    if(currentPlayer === player1){
+        disc.classList.add('red')
+        currentPlayer = player2
+    }else{
+        disc.classList.add('yellow')
+        currentPlayer = player1
+    }
+    rowIndex -= 1
+    lastRowArr[colIndex] = rowIndex
+    checkWinner()
 }
 
-const cellElement = document.querySelectorAll('.circle')
+//set the Players color to the last index of the row, which is 5
+//if index 5 has already className increment colIndex until you find empty cell
+
+
+
+//     if (player1Turn) {
+//         targetCell.classList.add('red')
+//         player1Turn = false;
+//     } else {
+//         targetCell.classList.add('yellow')
+//         player1Turn = true;
+//     }
+//     checkWinner('red')
+//     checkWinner('yellow')
+// }
 
 function checkWinner(arg) {
-    let start = 1
-    for (let i = 0; i < start; i++) {
-         for (let j = 0; j <= 6; j++) {
-            if (cellElement[j].classList.contains(arg) &&
-            cellElement[j+1].classList.contains(arg) &&
-            cellElement[j+2].classList.contains(arg)&&
-            cellElement[j+3].classList.contains(arg)
-            ) {
-                results.innerHTML = arg.toUpperCase() + ' wins!'
+    //check all horisontal lines
+    for (let i = 0; i < 6; i++) {
+         for (let j = 0; j < 4; j++) {
+            if (cellsArr[i][j] !== " "){
+                if(cellsArr[i][j] ===  cellsArr[i][j+1] &&
+                    cellsArr[i][j+1] === cellsArr[i][j+2] &&
+                    cellsArr[i][j+2] === cellsArr[i][j+3]
+                    ){
+                       setWinner(i, j)
+                       return
+                    }                
             }          
         }
-        console.log(start)
-       
     }
     
+//check all horisontal lines
+for (let i = 0; i < 6; i++) {
+    for (let j = 0; j < 4; j++) {
+       if (cellsArr[i][j] !== " "){
+           if(cellsArr[i][j] ===  cellsArr[i][j+1] &&
+               cellsArr[i][j+1] === cellsArr[i][j+2] &&
+               cellsArr[i][j+2] === cellsArr[i][j+3]
+               ){
+                  setWinner(i, j)
+                  return
+               }                
+       }          
+   }
 }
+
+//check all  diagonal lines
+for (let i = 3; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+       if (cellsArr[i][j] !== " "){
+           if(cellsArr[i][j] ===  cellsArr[i-1][j+1] &&
+               cellsArr[i-1][j+1] === cellsArr[i-2][j+2] &&
+               cellsArr[i-2][j+2] === cellsArr[i-3][j+3]
+               ){
+                  setWinner(i, j)
+                  return
+               }                
+       }          
+   }
+}
+
+//check all opposite diagonal lines
+for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+       if (cellsArr[i][j] !== " "){
+           if(cellsArr[i][j] ===  cellsArr[i+1][j+1] &&
+               cellsArr[i+1][j+1] === cellsArr[i+2][j+2] &&
+               cellsArr[i+2][j+2] === cellsArr[i+3][j+3]
+               ){
+                  setWinner(i, j)
+                  return
+               }                
+       }          
+   }
+}
+
+
+
+}
+
+    function setWinner(i, j){
+        if(cellsArr[i][j] === player1){
+            results.innerHTML = "Red Wins!";
+        }else {
+            results.innerHTML = "Yellow Wins!";
+        }
+        gameOver = true;
+    }
 
 
 
@@ -125,13 +212,6 @@ function checkWinner(arg) {
 
 
 
-const winnigArr = [
-    [0, 1, 2, 3], [3, 4, 5, 6], [1, 2, 3, 4], [2, 3, 4, 5],
-    [7, 8, 9, 10], [10, 11, 12, 13], [8, 9, 10, 11], [9, 10, 11, 12]
-    // , [1, 4, 7], [2, 5, 8],
-    // [0, 4, 8], [2, 4, 6]
-]
-
 
 // function checkWinner(arg) {
 //     winnigArr.forEach(element => {
@@ -154,23 +234,6 @@ const winnigArr = [
 
 
 
-
-// function containsClass(argument) {
-//     return [...argument].every(cell => {
-//         return cell.classList.contains('x') ||
-//             cell.classList.contains('o')
-//     })
-// }
-
-function removeClasses() {
-    cellElement.forEach(cell => {
-        cell.classList.remove('red', 'yellow')
-        results.innerHTML = ''
-        player1Turn = true;
-    })
-}
-
-
 // restartBtn.addEventListener('click', function () {
 //     showPopup();
 // })
@@ -183,8 +246,5 @@ function removeClasses() {
 // })
 
 resetBtn.addEventListener('click', function () {
-    // gameBoard.style.display = 'block'
-    // resultMessage.style.display = 'none'
-    // xTurn = true;
-    removeClasses();
+    location.reload();
 })
