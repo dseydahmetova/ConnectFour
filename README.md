@@ -7,6 +7,6 @@ code style: standard
 Built with
 * Visual Studio
 
-Screenshots:
-![welcome page of the game][welcomepage]
+* Screenshots:
+![welcome page of the game](https://github.com/dseydahmetova/ConnectFour/blob/main/images/welcomepage.png?raw=true)
 ![gamepage](https://github.com/dseydahmetova/ConnectFour/blob/main/images/gamepage.png?raw=true)
