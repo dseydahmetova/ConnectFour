@@ -1,20 +1,17 @@
-*,
+/* *,
 *::before,
 *::after {
     box-sizing: border-box;
 }
-
-@import "compass/css3";
-
-/* Variables
--------------------------------------------------------------- */
-:root {
-    --size: 140px;
-}
+*/
 
 body {
     background-color: #e9f2fd;
     font-family: 'Ink free', Georgia, 'Times New Roman', Times, serif;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
 }
 
 h1 {
@@ -23,14 +20,8 @@ h1 {
     font-size: 45px;
 }
 
-img {
-    width: 200px;
-    height: 150px;
-    text-align: center;
-}
-
 #gameBoard {
-    text-align: center;
+     text-align: center;
 }
 
 .game {
@@ -38,18 +29,40 @@ img {
     justify-content: space-around;
 }
 
-#container {
-    /* display: grid;
-    grid-template-columns: repeat(7, auto);
-    justify-items: center;
+.playerInfo{
+    display: flex;
     align-items: center;
-    justify-content: space-around; */
-    overflow:hidden;
+    flex-direction: column;
+}
+.label1{
+    content: "";
+    display: inline-block;
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 50%;
+    background: radial-gradient(#ff4747 1.12em, #c00303 1.25em); 
+}
+
+.label2{
+    content: "";
+    display: inline-block;
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 50%;
+    background:radial-gradient(#fff04e 1.12em, #ffc400 1.25em); 
+}
+
+#container {
     background-color: rgb(46, 46, 203);
-    height: 400px;
-    width: 450px; 
+    height: 600px;
+    width: 600px; 
     border: 3px solid navy;
     border-radius: 3%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    justify-items: center;
+    align-items: center; 
 }
 
 .circle {
@@ -58,13 +71,7 @@ img {
     height: 60px;
     border-radius: 50%;
     border: 3px solid navy;
-    display: grid;
-    place-items: center; 
-}
-
-.row{
-margin: 0 auto;
-display: flex;
+    margin-right: 12px; 
 }
 
 .red {
@@ -87,7 +94,7 @@ button {
 button:hover {
     background-color: #1e919a;
     color: white;
-}
+} */
 
 
 
@@ -95,7 +102,7 @@ button:hover {
 
 
 
-#popup {
+/* #popup {
     position: absolute;
     display: hidden;
     text-align: center;
@@ -121,21 +128,21 @@ button:hover {
 
 .input:focus {
     outline: 3px solid transparent;
-}
+} */
 
 #errors, .results {
     color: red;
     font-weight: bold;
 }
 
-label {
+/* label {
     font-size: 20px;
     font-weight: bold;
 }
 
 
 /* // End screen style */
-.result-message {
+/* .result-message {
     background: rgba(0, 0, 0, 0.9);
     display: none;
     padding-top: 250px;
@@ -149,4 +156,4 @@ label {
     top: 0;
     bottom: 0;
     text-align: center;
-}
+} */ 
