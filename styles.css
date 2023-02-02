@@ -156,3 +156,10 @@ label {
     bottom: 0;
     text-align: center;
 } 
+
+
+
+.grid-row {
+    margin: 0 auto;
+    display: flex;
+}

@@ -25,7 +25,6 @@ let player2Name = document.getElementById('player2Name')
 let errors = document.querySelector('.errors')
 let container = document.getElementById('container')
 let results = document.querySelector('.results')
-let winner = document.querySelector('.winner')
 let resultMessage = document.querySelector('.result-message')
 let restartBtn = document.getElementById('restartBtn')
 let resetBtn = document.querySelector('#resetBtn')
@@ -52,32 +51,29 @@ function startGame(){
         resultMessage.style.display = 'none'
         player1Name.value = '';
         player2Name.value = '';
-createBoard()
-    }
+
+
 //Create two dimen. array[][] to the board
-function createBoard(){
-    for (let row = 0; row < 6; row++) {
-        let rowCells = [];
-        for (let col = 0; col < 7; col++) {
-            rowCells.push(' ')
-            const colCells = document.createElement('div')
-            colCells.classList.add('circle')
-            colCells.setAttribute('id', row + "-" + col)
-            colCells.addEventListener('click', handleClick)
-            container.appendChild(colCells)
-        }
-        cellsArr.push(rowCells)
+for (let row = 0; row < 6; row++) {
+    let rowCells = [];
+    for (let col = 0; col < 7; col++) {
+        rowCells.push(' ')
+        const colCells = document.createElement('div')
+        colCells.classList.add('circle')
+        colCells.setAttribute('id', row + "-" + col)
+        colCells.addEventListener('click', handleClick)
+        container.appendChild(colCells)
     }
-    }
-   
-
-
+    cellsArr.push(rowCells)
+}
+}
+console.log(cellsArr)
 //onclick() save the column index of the target element
 function handleClick(e) {
     if(gameOver){
         return
     }
-    // console.log(cellsArr)
+
     let coord = e.target.id.split('-') 
     let rowIndex = parseInt(coord[0])
     let colIndex = parseInt(coord[1])
@@ -98,12 +94,8 @@ function handleClick(e) {
     }
     rowIndex -= 1
     lastRowArr[colIndex] = rowIndex
-
-
-
     checkWinner()
 }
-
 
 //set the Players color to the last index of the row, which is 5
 //if index 5 has already className increment colIndex until you find empty cell
@@ -122,7 +114,6 @@ function handleClick(e) {
 // }
 
 function checkWinner() {
-    
     //check all horisontal lines
     for (let i = 0; i < 6; i++) {
          for (let j = 0; j < 4; j++) {
@@ -188,18 +179,12 @@ for (let i = 0; i < 3; i++) {
 }
 
     function setWinner(i, j){
-        resultMessage.style.display = 'block'
         if(cellsArr[i][j] === player1){
             results.innerHTML = "Red Wins!";
-           winner.innerHTML = `${player1Name.value} wins`
         }else {
             results.innerHTML = "Yellow Wins!";
-            resultMessage.style.display = 'block'
-            winner.innerHTML = `${player2Name.value} wins`
-
         }
         gameOver = true;
-        
     }
 
 
@@ -276,15 +261,12 @@ closeBtn.addEventListener('click', function () {
 resetBtn.addEventListener('click', function () {
     popupWindow.style.display = 'none'
     gameBoard.style.display = 'block'
-    results.innerHTML = ''
-    cellsArr
+  results.innerHTML = ''
 
-
-    // for(let i = 0; i < 6; i++){
-    //     for(let j = 0; j<7; j++){
-    //         let disc = document.getElementById(i.toString() + '-' + j.toString())
-    //     disc.classList.remove('red', 'yellow')
-    //     }
-    // }
-   
+    for(let i = 0; i < 6; i++){
+        for(let j = 0; j<7; j++){
+            let disc = document.getElementById(i.toString() + '-' + j.toString())
+            disc.classList.remove('red','yellow')
+        }
+    }
 })
