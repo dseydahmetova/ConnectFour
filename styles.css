@@ -12,12 +12,19 @@ body {
     font-weight: bold;
     margin: 0;
     padding: 0;
+    text-align: center;
 }
 
 h1 {
     text-align: center;
     color: navy;
     font-size: 45px;
+}
+
+img{
+    width: 400px;
+    height: 250px;
+    border-radius: 20%;
 }
 
 #gameBoard {
@@ -88,21 +95,15 @@ button {
     border: 1px solid navy;
     border-radius: 8px;
     padding: 10px;
-    margin: 50px;
+    margin: 70px;
 }
 
 button:hover {
     background-color: #1e919a;
     color: white;
-} */
+} 
 
-
-
-
-
-
-
-/* #popup {
+#popup {
     position: absolute;
     display: hidden;
     text-align: center;
@@ -113,14 +114,12 @@ button:hover {
     margin-left: -250px;
     border: 5px solid lightblue;
     border-radius: 10px;
-    background-color: rgb(246, 251, 252);
 }
 
 .input {
     font-size: 16px;
     font-family: Georgia, 'Times New Roman', Times, serif;
     padding: 1.25em 0.5em;
-    background-color: rgb(246, 251, 252);
     border-radius: 6px;
     display: flex;
     justify-content: space-around;
@@ -128,23 +127,23 @@ button:hover {
 
 .input:focus {
     outline: 3px solid transparent;
-} */
+} 
 
 #errors, .results {
     color: red;
-    font-weight: bold;
+    margin: 0 auto;
 }
 
-/* label {
+label {
     font-size: 20px;
     font-weight: bold;
 }
 
 
-/* // End screen style */
-/* .result-message {
-    background: rgba(0, 0, 0, 0.9);
-    display: none;
+/* End screen style */
+.result-message {
+    background: rgba(24, 27, 31, 0.9);
+    /* display: none; */
     padding-top: 250px;
     display: flex;
     flex-direction: column;
@@ -156,4 +155,11 @@ button:hover {
     top: 0;
     bottom: 0;
     text-align: center;
-} */ 
+} 
+
+
+
+.grid-row {
+    margin: 0 auto;
+    display: flex;
+}
