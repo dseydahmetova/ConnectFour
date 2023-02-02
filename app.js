@@ -46,12 +46,6 @@ window.onload = startGame;
 currentPlayer = player1
 
 function startGame(){
-    popupWindow.style.display = 'block';
-    gameBoard.style.display = 'none'
-    resultMessage.style.display = 'none'
-    player1Name.value = '';
-    player2Name.value = '';
-
 //Create two dimen. array[][] to the board
 for (let row = 0; row < 6; row++) {
     let rowCells = [];
@@ -112,7 +106,7 @@ function handleClick(e) {
 //     checkWinner('yellow')
 // }
 
-function checkWinner(arg) {
+function checkWinner() {
     //check all horisontal lines
     for (let i = 0; i < 6; i++) {
          for (let j = 0; j < 4; j++) {
@@ -128,9 +122,9 @@ function checkWinner(arg) {
         }
     }
     
-//check all vertical lines
-for (let j = 0; j < 7; j++) {
-    for (let i = 0; i < 3; i++) {
+//check all horisontal lines
+for (let i = 0; i < 6; i++) {
+    for (let j = 0; j < 4; j++) {
        if (cellsArr[i][j] !== " "){
            if(cellsArr[i][j] ===  cellsArr[i+1][j] &&
                cellsArr[i+1][j] === cellsArr[i+2][j] &&
@@ -144,8 +138,8 @@ for (let j = 0; j < 7; j++) {
 }
 
 //check all  diagonal lines
-for (let i = 3; i < 6; i++) {
-    for (let j = 0; j < 4; j++) {
+for (let i = 3; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
        if (cellsArr[i][j] !== " "){
            if(cellsArr[i][j] ===  cellsArr[i-1][j+1] &&
                cellsArr[i-1][j+1] === cellsArr[i-2][j+2] &&
@@ -199,20 +193,21 @@ for (let i = 0; i < 3; i++) {
 //     player1Turn = true;
 // }
 
+//window.onload = showGameBoard;
 
-startBtn.addEventListener('click', function () {
-    if (player1Name.value == '' || player2Name.value == '') {
-        document.getElementById('errors').innerHTML = "*Input can not be left blank*";
-    } else {
-        popupWindow.style.display = "none";
-        resultMessage.style.display = 'none';
-        gameBoard.style.display = 'block';
-        document.querySelector('#name1').innerHTML = player1Name.value.toUpperCase();
-        document.querySelector('#name2').innerHTML = player2Name.value.toUpperCase();
+// startBtn.addEventListener('click', function () {
+//     if (playerXName.value == '' || playerOName.value == '') {
+//         document.getElementById('errors').innerHTML = "*Input can not be left blank*";
+//     } else {
+//         popupWindow.style.display = "none";
+//         resultMessage.style.display = 'none';
+//         gameBoard.style.display = 'block';
+//         document.querySelector('#name1').innerHTML = playerXName.value;
+//         document.querySelector('#name2').innerHTML = playerOName.value;
 
 
-    }
-})
+//     }
+// })
 
 
 
@@ -239,9 +234,9 @@ startBtn.addEventListener('click', function () {
 
 
 
-restartBtn.addEventListener('click', function () {
-    location.reload();
-})
+// restartBtn.addEventListener('click', function () {
+//     showPopup();
+// })
 
 closeBtn.addEventListener('click', function () {
     gameBoard.style.display = 'block'
