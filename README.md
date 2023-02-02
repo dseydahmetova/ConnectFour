@@ -11,8 +11,8 @@ Built with
 * Visual Studio
 
 Screenshots:
-![welcome page of the game][welcomepage]
-![welcome page of the game][gamepage]
+![welcomepage]
+![gamepage]
 
 [gamepage]: /images/gamepage.PNG
 [welcomepage]: /images/connect4welcome.PNG

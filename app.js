@@ -20,8 +20,8 @@
 
 
 //create variables 
-let playerXName = document.getElementById('playerXName')
-let playerOName = document.getElementById('playerOName')
+let player1Name = document.getElementById('player1Name')
+let player2Name = document.getElementById('player2Name')
 let errors = document.querySelector('.errors')
 let container = document.getElementById('container')
 let results = document.querySelector('.results')
@@ -46,6 +46,12 @@ window.onload = startGame;
 currentPlayer = player1
 
 function startGame(){
+    popupWindow.style.display = 'block';
+    gameBoard.style.display = 'none'
+    resultMessage.style.display = 'none'
+    player1Name.value = '';
+    player2Name.value = '';
+
 //Create two dimen. array[][] to the board
 for (let row = 0; row < 6; row++) {
     let rowCells = [];
@@ -122,13 +128,13 @@ function checkWinner(arg) {
         }
     }
     
-//check all horisontal lines
-for (let i = 0; i < 6; i++) {
-    for (let j = 0; j < 4; j++) {
+//check all vertical lines
+for (let j = 0; j < 7; j++) {
+    for (let i = 0; i < 3; i++) {
        if (cellsArr[i][j] !== " "){
-           if(cellsArr[i][j] ===  cellsArr[i][j+1] &&
-               cellsArr[i][j+1] === cellsArr[i][j+2] &&
-               cellsArr[i][j+2] === cellsArr[i][j+3]
+           if(cellsArr[i][j] ===  cellsArr[i+1][j] &&
+               cellsArr[i+1][j] === cellsArr[i+2][j] &&
+               cellsArr[i+2][j] === cellsArr[i+3][j]
                ){
                   setWinner(i, j)
                   return
@@ -138,8 +144,8 @@ for (let i = 0; i < 6; i++) {
 }
 
 //check all  diagonal lines
-for (let i = 3; i < 3; i++) {
-    for (let j = 0; j < 3; j++) {
+for (let i = 3; i < 6; i++) {
+    for (let j = 0; j < 4; j++) {
        if (cellsArr[i][j] !== " "){
            if(cellsArr[i][j] ===  cellsArr[i-1][j+1] &&
                cellsArr[i-1][j+1] === cellsArr[i-2][j+2] &&
@@ -154,7 +160,7 @@ for (let i = 3; i < 3; i++) {
 
 //check all opposite diagonal lines
 for (let i = 0; i < 3; i++) {
-    for (let j = 0; j < 3; j++) {
+    for (let j = 0; j < 4; j++) {
        if (cellsArr[i][j] !== " "){
            if(cellsArr[i][j] ===  cellsArr[i+1][j+1] &&
                cellsArr[i+1][j+1] === cellsArr[i+2][j+2] &&
@@ -193,21 +199,20 @@ for (let i = 0; i < 3; i++) {
 //     player1Turn = true;
 // }
 
-//window.onload = showGameBoard;
 
-// startBtn.addEventListener('click', function () {
-//     if (playerXName.value == '' || playerOName.value == '') {
-//         document.getElementById('errors').innerHTML = "*Input can not be left blank*";
-//     } else {
-//         popupWindow.style.display = "none";
-//         resultMessage.style.display = 'none';
-//         gameBoard.style.display = 'block';
-//         document.querySelector('#name1').innerHTML = playerXName.value;
-//         document.querySelector('#name2').innerHTML = playerOName.value;
+startBtn.addEventListener('click', function () {
+    if (player1Name.value == '' || player2Name.value == '') {
+        document.getElementById('errors').innerHTML = "*Input can not be left blank*";
+    } else {
+        popupWindow.style.display = "none";
+        resultMessage.style.display = 'none';
+        gameBoard.style.display = 'block';
+        document.querySelector('#name1').innerHTML = player1Name.value.toUpperCase();
+        document.querySelector('#name2').innerHTML = player2Name.value.toUpperCase();
 
 
-//     }
-// })
+    }
+})
 
 
 
@@ -234,17 +239,24 @@ for (let i = 0; i < 3; i++) {
 
 
 
-// restartBtn.addEventListener('click', function () {
-//     showPopup();
-// })
+restartBtn.addEventListener('click', function () {
+    location.reload();
+})
 
-// closeBtn.addEventListener('click', function () {
-//     gameBoard.style.display = 'block'
-//     resultMessage.style.display = 'none'
-//     xTurn = true;
-//     removeClasses();
-// })
+closeBtn.addEventListener('click', function () {
+    gameBoard.style.display = 'block'
+    resultMessage.style.display = 'none'
+})
 
 resetBtn.addEventListener('click', function () {
-    location.reload();
+    popupWindow.style.display = 'none'
+    gameBoard.style.display = 'block'
+  results.innerHTML = ''
+
+    for(let i = 0; i < 6; i++){
+        for(let j = 0; j<7; j++){
+            let disc = document.getElementById(i.toString() + '-' + j.toString())
+            disc.classList.remove('red','yellow')
+        }
+    }
 })

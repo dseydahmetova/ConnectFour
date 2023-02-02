@@ -18,7 +18,16 @@ h1 {
     text-align: center;
     color: navy;
     font-size: 45px;
+    margin-top: 10px;
 }
+
+img{
+    width: 600px;
+    height: 200px;
+    margin: 0;
+    border-radius: 10%;
+}
+
 
 #gameBoard {
      text-align: center;
@@ -88,13 +97,13 @@ button {
     border: 1px solid navy;
     border-radius: 8px;
     padding: 10px;
-    margin: 50px;
+    margin-top: 10px;
 }
 
 button:hover {
     background-color: #1e919a;
     color: white;
-} */
+} 
 
 
 
@@ -102,7 +111,7 @@ button:hover {
 
 
 
-/* #popup {
+#popup {
     position: absolute;
     display: hidden;
     text-align: center;
@@ -128,21 +137,27 @@ button:hover {
 
 .input:focus {
     outline: 3px solid transparent;
-} */
+} 
 
-#errors, .results {
+ .results {
     color: red;
     font-weight: bold;
 }
+#errors{
+    color: red;
+    font-weight: bold;
+    font-size: 15px;
+    margin: 0;
+}
 
-/* label {
+label {
     font-size: 20px;
     font-weight: bold;
 }
 
 
-/* // End screen style */
-/* .result-message {
+ /* End screen style */
+.result-message {
     background: rgba(0, 0, 0, 0.9);
     display: none;
     padding-top: 250px;
@@ -156,4 +171,4 @@ button:hover {
     top: 0;
     bottom: 0;
     text-align: center;
-} */ 
+} 
