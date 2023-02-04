@@ -25,6 +25,7 @@ let player2Name = document.getElementById('player2Name')
 let errors = document.querySelector('.errors')
 let container = document.getElementById('container')
 let results = document.querySelector('.results')
+let finalresults = document.querySelector('.finalresults')
 let resultMessage = document.querySelector('.result-message')
 let restartBtn = document.getElementById('restartBtn')
 let resetBtn = document.querySelector('#resetBtn')
@@ -34,7 +35,7 @@ let popupWindow = document.getElementById('popup')
 let gameBoard = document.getElementById('gameBoard')
 let name1 = document.getElementById('name1')
 let name2 = document.getElementById('name2')
-let player1 = "red"
+let player1 = "blue"
 let player2 = 'yellow'
 let currentPlayer
 let gameOver = false
@@ -46,7 +47,7 @@ let lastRowArr = [5, 5, 5, 5, 5, 5, 5]
 window.onload = startGame;
 
 currentPlayer = player1
-name1.classList.add('glowing-circle')
+
 
 
 function startGame() {
@@ -92,7 +93,7 @@ function handleClick(e) {
     cellsArr[rowIndex][colIndex] = currentPlayer
     let disc = document.getElementById(rowIndex.toString() + '-' + colIndex.toString())
     if (currentPlayer === player1) {
-        disc.classList.add('red')
+        disc.classList.add('blue')
         currentPlayer = player2
         name2.classList.add('glowing-circle')
         name1.classList.remove('glowing-circle')
@@ -189,10 +190,13 @@ function checkWinner() {
 }
 
 function setWinner(i, j) {
+    resultMessage.style.display = 'block'
     if (cellsArr[i][j] === player1) {
-        results.innerHTML = "Red Wins!";
+        results.innerHTML = "Blue Wins!";
+        finalresults.innerHTML = `${player1Name.value.toUpperCase()} wins!`;
     } else {
         results.innerHTML = "Yellow Wins!";
+        finalresults.innerHTML = `${player2Name.value.toUpperCase()} wins!`;
     }
     gameOver = true;
     name2.classList.remove('glowing-circle')
@@ -267,10 +271,11 @@ resetBtn.addEventListener('click', function () {
     gameBoard.style.display = 'block'
     results.innerHTML = ''
 
-    for (let i = 0; i < 6; i++) {
-        for (let j = 0; j < 7; j++) {
-            let disc = document.getElementById(i.toString() + '-' + j.toString())
-            disc.classList.remove('red', 'yellow')
-        }
-    }
+    // for (let i = 0; i < 6; i++) {
+    //     for (let j = 0; j < 7; j++) {
+    //         let disc = document.getElementById(i.toString() + '-' + j.toString())
+    //         disc.classList.remove('red', 'yellow')
+    //     }
+    // }
+    gameOver = true;
 })
