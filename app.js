@@ -44,34 +44,42 @@ let lastRowArr = [5, 5, 5, 5, 5, 5, 5]
 
 
 
-window.onload = startGame;
+window.onload =  showWindow
 
 currentPlayer = player1
 
 
 
-function startGame() {
 
+
+function showWindow(){
     popupWindow.style.display = 'block';
     gameBoard.style.display = 'none'
     resultMessage.style.display = 'none'
     player1Name.value = '';
     player2Name.value = '';
 
-    //Create two dimen. array[][] to the board
-    for (let row = 0; row < 6; row++) {
-        let rowCells = [];
-        for (let col = 0; col < 7; col++) {
-            rowCells.push(' ')
-            const colCells = document.createElement('div')
-            colCells.classList.add('circle')
-            colCells.setAttribute('id', row + "-" + col)
-            colCells.addEventListener('click', handleClick)
-            container.appendChild(colCells)
-        }
-        cellsArr.push(rowCells)
-    }
 }
+
+function startGame() {
+    gameBoard.style.display = 'block'
+ //Create two dimen. array[][] to the board
+ lastRowArr = [5, 5, 5, 5, 5, 5, 5]
+ for (let row = 0; row < 6; row++) {
+    let rowCells = [];
+    for (let col = 0; col < 7; col++) {
+        rowCells.push(' ')
+        const colCells = document.createElement('div')
+        colCells.classList.add('circle')
+        colCells.setAttribute('id', row + "-" + col)
+        colCells.addEventListener('click', handleClick)
+        container.appendChild(colCells)
+    }
+    cellsArr.push(rowCells)
+}
+
+    }
+   
 console.log(cellsArr)
 
 
@@ -227,7 +235,7 @@ startBtn.addEventListener('click', function () {
         gameBoard.style.display = 'block';
         document.querySelector('#name1').innerHTML = player1Name.value.toUpperCase();
         document.querySelector('#name2').innerHTML = player2Name.value.toUpperCase();
-
+startGame()
 
     }
 })
@@ -269,13 +277,15 @@ closeBtn.addEventListener('click', function () {
 resetBtn.addEventListener('click', function () {
     popupWindow.style.display = 'none'
     gameBoard.style.display = 'block'
-    results.innerHTML = ''
-
+    // results.innerHTML = ''
+    container.innerHTML = ''
     // for (let i = 0; i < 6; i++) {
     //     for (let j = 0; j < 7; j++) {
     //         let disc = document.getElementById(i.toString() + '-' + j.toString())
-    //         disc.classList.remove('red', 'yellow')
+    //         disc.classList.remove('blue', 'yellow')
     //     }
     // }
-    gameOver = true;
+    gameOver = false
+  startGame()  
+  
 })
