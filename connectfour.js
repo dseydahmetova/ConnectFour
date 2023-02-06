@@ -93,7 +93,8 @@ function handleClick(e) {
     if (gameOver) {
         return
     }
-    let coord = e.target.id.split('-')
+    //id  = ["0" - "0"], with split we will transfer it to ["0", "0"]
+    let coord = e.target.id.split('-')  
     let rowIndex = parseInt(coord[0])
     let colIndex = parseInt(coord[1])
 
@@ -115,7 +116,7 @@ function handleClick(e) {
         name1.classList.add('glowing-circle')
         name2.classList.remove('glowing-circle')
     }
-    //if index 5 has already className increment colIndex until you find empty cell
+    //if index 5 has already has className increment colIndex until you find empty cell
     rowIndex -= 1
     lastRowArr[colIndex] = rowIndex
     checkWinner()
@@ -130,7 +131,7 @@ function checkWinner() {
                     cellsArr[i][j + 1] === cellsArr[i][j + 2] &&
                     cellsArr[i][j + 2] === cellsArr[i][j + 3]
                 ) {
-                    setWinner(i, j)
+                    showWinner(i, j)
                     return
                 }
             }
@@ -145,7 +146,7 @@ function checkWinner() {
                     cellsArr[i + 1][j] === cellsArr[i + 2][j] &&
                     cellsArr[i + 2][j] === cellsArr[i + 3][j]
                 ) {
-                    setWinner(i, j)
+                    showWinner(i, j)
                     return
                 }
             }
@@ -160,7 +161,7 @@ function checkWinner() {
                     cellsArr[i - 1][j + 1] === cellsArr[i - 2][j + 2] &&
                     cellsArr[i - 2][j + 2] === cellsArr[i - 3][j + 3]
                 ) {
-                    setWinner(i, j)
+                    showWinner(i, j)
                     return
                 }
             }
@@ -175,7 +176,7 @@ function checkWinner() {
                     cellsArr[i + 1][j + 1] === cellsArr[i + 2][j + 2] &&
                     cellsArr[i + 2][j + 2] === cellsArr[i + 3][j + 3]
                 ) {
-                    setWinner(i, j)
+                    showWinner(i, j)
                     return
                 }
             }
@@ -183,7 +184,7 @@ function checkWinner() {
     }
 }
 
-function setWinner(i, j) {
+function showWinner(i, j) {
     resultMessage.style.display = 'block'
     if (cellsArr[i][j] === player1) {
         results.innerHTML = "Blue Wins!";
@@ -212,164 +213,16 @@ resetBtn.addEventListener('click', function () {
     gameBoard.style.display = 'block'
     container.innerHTML = ''
     gameOver = false
+    currentPlayer = player1
     startGame()  
-  
 })
-
-
-
-
-// Rules of the Game
-
-// The game is to be played between two people.
-// One of the player chooses ‘O’ and the other ‘X’ to mark their respective cells.
-// The game starts with one of the players and the game ends when one of the players 
-//has one whole row/ column/ diagonal filled with character (‘O’ or ‘X’).
-
-// Pseudo code
-
-//create a board 3 x 3
-// create classes for X and O
-//onclick() 
-//check if cell doesn't has classname X or O already
-//add X or O inside the cell if has no classname
-//if occupied prompt msg NOT allowed
-// switch turns: if current player turn is X, switch the currentPlayer Turn to O after X onclick()
-//count X, if count is 3 and if it is in one row/column/diagonal RESULTS msg Player1 win
-//else if count is 3 and if it is in one row/column/diagonal RESULTS msg Player2 win
-//else promt "TIE"
-//restart btn ---> to start the game with clean cells
-
-
-
-
-
-// function removeClasses() {
-//     checkCell.forEach(cell => {
-//         cell.classList.remove('x', 'o')
-//         results.innerHTML = ''
-//     })
-// }
-
-// function showPopup() {
-//     gameBoard.style.display = 'none'
-//     gameBoard2.style.display = 'block'
-//     resultMessage.style.display = 'none'
-//     playerXName.value = '';
-//     playerOName.value = '';
-//     removeClasses();
-//     xTurn = true;
-// }
-
-//window.onload = showPopup;
-// xTurn = true;
 
 tictactoeBtn.addEventListener('click', function () {
     if (player1Name.value == '' || player2Name.value == '') {
         document.getElementById('errors').innerHTML = "*Input can not be left blank*";
     } else {
-        //popupWindow.style.display = "none";
-       // resultMessage.style.display = 'none';
-        //gameBoard2.style.display = 'block';
-        //gameBoard.style.display = 'block'
         window.open('tictactoe.html')
-        
         playerXName.innerHTML = player1Name.value.toUpperCase();
         playerOName.innerHTML = player2Name.value.toUpperCase();
-        // createBox()
     }
 })
-// console.log(document.getElementById('nameX'))
-
-// function createBox(){
-//    console.log("hello")
-//     for (let i = 0; i < 9; i++) {
-//         const cells = document.createElement('div')
-//         cells.classList.add('red')
-//         container2.appendChild(cells)
-//         cellsArr2.push(cells)
-//     }
-//     console.log(cellsArr)
-//     const checkCell = document.querySelectorAll('.cell')
-    
-//     checkCell.forEach(cell => {
-//         cell.addEventListener('click', setValue())
-//     })
-// }
-
-
-
-// function setValue(e) {
-//     const targetCell = e.target
-//     if (xTurn) {
-//         if (targetCell.classList.contains('x') || targetCell.classList.contains('o')) {
-//             targetCell.classList.add('not-allowed')
-//         } else {
-//             targetCell.classList.add('x')
-//             xTurn = false;
-//         }
-//     }
-//     if (targetCell.classList.contains('x') || targetCell.classList.contains('o')) {
-//         targetCell.classList.add('not-allowed')
-//     } else {
-//         targetCell.classList.add('o')
-//         xTurn = true;
-//     }
-//     checkwinner('x')
-//     checkwinner('o')
-// }
-
-
-// const winnigArr = [
-//     [0, 1, 2], [3, 4, 5], [6, 7, 8],
-//     [0, 3, 6], [1, 4, 7], [2, 5, 8],
-//     [0, 4, 8], [2, 4, 6]
-// ]
-
-
-// function checkwinner(arg) {
-//     winnigArr.forEach(element => {
-//         let arr = []
-//         element.forEach(item => {
-//             if (checkCell[item].classList.contains(arg)) {
-//                 arr.push(checkCell[item])
-//             }
-//             if (arr.length === 3) {
-//                 results.innerHTML = arg.toUpperCase() + ' wins!'
-//                 resultMessage.style.display = 'block'
-
-//             }
-//             else if (containsClass(checkCell)) {
-//                 results.innerHTML = "Match Tie!";
-//             }
-//         })
-//     })
-// }
-
-// function containsClass(argument) {
-//     return [...argument].every(cell => {
-//         return cell.classList.contains('x') ||
-//             cell.classList.contains('o')
-//     })
-// }
-
-
-// restartBtn.addEventListener('click', function () {
-//     showPopup();
-// })
-
-// closeBtn.addEventListener('click', function () {
-//     gameBoard.style.display = 'none'
-//     gameBoard2.style.display = 'block'
-//     resultMessage.style.display = 'none'
-//     xTurn = true;
-//     removeClasses();
-// })
-
-// resetBtn.addEventListener('click', function () {
-//     gameBoard.style.display = 'none'
-//     gameBoard2.style.display = 'block'
-//     resultMessage.style.display = 'none'
-//     xTurn = true;
-//     removeClasses();
-// })
