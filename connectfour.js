@@ -20,6 +20,7 @@
 
 
 //create variables 
+
 let player1Name = document.getElementById('player1Name')
 let player2Name = document.getElementById('player2Name')
 let errors = document.querySelector('.errors')
@@ -40,43 +41,17 @@ let player2 = 'yellow'
 let currentPlayer
 let gameOver = false
 let cellsArr = []
-//let lastRowArr = [5, 5, 5, 5, 5, 5, 5]
-
-
-
-
-
-let playerXName = document.getElementById('player1Name')
-let playerOName = document.getElementById('player2Name')
-let container2 = document.getElementById('container2')
-// let results = document.querySelector('.results')
-//let resultMessage = document.querySelector('.result-message')
-//let restartBtn = document.getElementById('restartBtn')
-//let resetBtn = document.querySelector('#resetBtn')
-//let closeBtn = document.querySelector('#closeBtn')
 let tictactoeBtn = document.getElementById('tictactoe')
-let gameBoard2 = document.getElementById('gameBoard2')
-let xTurn
-let cellsArr2 = []
-
-
 
 window.onload =  showWindow
-
 currentPlayer = player1
-
-
-
-
 
 function showWindow(){
     popupWindow.style.display = 'block';
     gameBoard.style.display = 'none'
-    //gameBoard2.style.display = 'none'
     resultMessage.style.display = 'none'
     player1Name.value = '';
     player2Name.value = '';
-
 }
 
 connectFourBtn.addEventListener('click', function () {
@@ -86,45 +61,38 @@ connectFourBtn.addEventListener('click', function () {
         popupWindow.style.display = "none";
         resultMessage.style.display = 'none';
         gameBoard.style.display = 'block';
-       // gameBoard2.style.display = 'none'
         document.querySelector('#name1').innerHTML = player1Name.value.toUpperCase();
         document.querySelector('#name2').innerHTML = player2Name.value.toUpperCase();
-startGame()
-
+        startGame()
     }
 })
 
-
+// create 6x7 box add id with row and column number for each box
 function startGame() {
     gameBoard.style.display = 'block'
-   // gameBoard2.style.display = 'none'
- //Create two dimen. array[][] to the board
- cellsArr = []
- lastRowArr = [5, 5, 5, 5, 5, 5, 5]
- for (let row = 0; row < 6; row++) {
-    let rowCells = [];
-    for (let col = 0; col < 7; col++) {
-        rowCells.push(' ')
-        const colCells = document.createElement('div')
-        colCells.classList.add('circle')
-        colCells.setAttribute('id', row + "-" + col)
-        colCells.addEventListener('click', handleClick)
-        container.appendChild(colCells)
-        console.log(row, col, colCells)
+    cellsArr = []
+
+    //create row array to put the disc to the bottom of the column 
+    lastRowArr = [5, 5, 5, 5, 5, 5, 5]
+    for (let row = 0; row < 6; row++) {
+        let rowCells = [];
+        for (let col = 0; col < 7; col++) {
+            rowCells.push(' ')
+            const colCells = document.createElement('div')
+            colCells.classList.add('circle')
+            colCells.setAttribute('id', row + "-" + col)
+            colCells.addEventListener('click', handleClick)
+            container.appendChild(colCells)
+        }
+        cellsArr.push(rowCells)
     }
-    console.log(rowCells)
-    cellsArr.push(rowCells)
 }
-
-    }
-
 
 //onclick() save the column index of the target element
 function handleClick(e) {
     if (gameOver) {
         return
     }
-    console.log(e.target.id)
     let coord = e.target.id.split('-')
     let rowIndex = parseInt(coord[0])
     let colIndex = parseInt(coord[1])
@@ -147,26 +115,11 @@ function handleClick(e) {
         name1.classList.add('glowing-circle')
         name2.classList.remove('glowing-circle')
     }
+    //if index 5 has already className increment colIndex until you find empty cell
     rowIndex -= 1
     lastRowArr[colIndex] = rowIndex
     checkWinner()
 }
-
-//set the Players color to the last index of the row, which is 5
-//if index 5 has already className increment colIndex until you find empty cell
-
-
-
-//     if (player1Turn) {
-//         targetCell.classList.add('red')
-//         player1Turn = false;
-//     } else {
-//         targetCell.classList.add('yellow')
-//         player1Turn = true;
-//     }
-//     checkWinner('red')
-//     checkWinner('yellow')
-// }
 
 function checkWinner() {
     //check all horisontal lines
@@ -228,9 +181,6 @@ function checkWinner() {
             }
         }
     }
-
-
-
 }
 
 function setWinner(i, j) {
@@ -248,70 +198,21 @@ function setWinner(i, j) {
 }
 
 
-
-
-// function showGameBoard() {
-//     popupWindow.style.display = 'block';
-//     gameBoard.style.display = 'none'
-//     resultMessage.style.display = 'none'
-//     playerXName.value = '';
-//     playerOName.value = '';
-//     removeClasses();
-//     player1Turn = true;
-// }
-
-//window.onload = showGameBoard;
-
-
-
-
-
-
-// function checkWinner(arg) {
-//     winnigArr.forEach(element => {
-//         let arr = []
-//         element.forEach(item => {
-//             if (cellElement[item].classList.contains(arg)) {
-//                 arr.push(cellElement[item])
-//             }
-//             if (arr.length === 4) {
-//                 results.innerHTML = arg.toUpperCase() + ' wins!'
-
-//             }
-//             // else if (containsClass(checkCell)) {
-//             //     results.innerHTML = "Match Tie!";
-//             // }
-//         })
-//     })
-// }
-
-
-
-
 restartBtn.addEventListener('click', function () {
     location.reload()
 })
 
 closeBtn.addEventListener('click', function () {
     gameBoard.style.display = 'block'
-   // gameBoard2.style.display = 'none'
     resultMessage.style.display = 'none'
 })
 
 resetBtn.addEventListener('click', function () {
     popupWindow.style.display = 'none'
     gameBoard.style.display = 'block'
-   // gameBoard2.style.display = 'none'
-    // results.innerHTML = ''
     container.innerHTML = ''
-    // for (let i = 0; i < 6; i++) {
-    //     for (let j = 0; j < 7; j++) {
-    //         let disc = document.getElementById(i.toString() + '-' + j.toString())
-    //         disc.classList.remove('blue', 'yellow')
-    //     }
-    // }
     gameOver = false
-  startGame()  
+    startGame()  
   
 })
 
@@ -362,6 +263,7 @@ resetBtn.addEventListener('click', function () {
 
 //window.onload = showPopup;
 // xTurn = true;
+
 tictactoeBtn.addEventListener('click', function () {
     if (player1Name.value == '' || player2Name.value == '') {
         document.getElementById('errors').innerHTML = "*Input can not be left blank*";
@@ -371,11 +273,13 @@ tictactoeBtn.addEventListener('click', function () {
         //gameBoard2.style.display = 'block';
         //gameBoard.style.display = 'block'
         window.open('tictactoe.html')
-        // document.querySelector('#nameX').innerHTML = player1Name.value.toUpperCase();
-        // document.querySelector('#nameO').innerHTML = player2Name.value.toUpperCase();
+        
+        playerXName.innerHTML = player1Name.value.toUpperCase();
+        playerOName.innerHTML = player2Name.value.toUpperCase();
         // createBox()
     }
 })
+// console.log(document.getElementById('nameX'))
 
 // function createBox(){
 //    console.log("hello")

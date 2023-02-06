@@ -20,17 +20,12 @@
 //restart btn ---> to start the game with clean cells
 
 
-// let playerXName = document.getElementById('playerXName')
-// let playerOName = document.getElementById('playerOName')
-let errors = document.querySelector('.errors')
 let container = document.getElementById('container2')
 let results = document.querySelector('.results')
 let resultMessage = document.querySelector('.result-message')
 let restartBtn = document.getElementById('newGameBtn')
 let resetBtn = document.querySelector('#resetBtn')
 let closeBtn = document.querySelector('#closeBtn')
-let startBtn = document.getElementById('startBtn')
-let popupWindow = document.getElementById('popup')
 let gameBoard = document.getElementById('gameBoard')
 let xTurn
 let cellsArr = []
@@ -39,20 +34,15 @@ let cellsArr = []
 
 
 function showPopup() {
-   // popupWindow.style.display = 'block';
     gameBoard.style.display = 'block'
-   resultMessage.style.display = 'none'
-    // playerXName.value = '';
-    // playerOName.value = '';
-  // removeClasses();
+    resultMessage.style.display = 'none'
     xTurn = true;
 }
 
 window.onload = showPopup;
 
 
-
-
+// creates a box 3x3
 for (let i = 0; i < 9; i++) {
     const cells = document.createElement('div')
     cells.classList.add('cell')
@@ -61,14 +51,11 @@ for (let i = 0; i < 9; i++) {
 }
 
 const checkCell = document.querySelectorAll('.cell')
-
-console.log(checkCell)
-
 checkCell.forEach(cell => {
     cell.addEventListener('click', handleClick)
 })
 
-
+// checks if the clicked box already has class, if yes do not allow to change initial value of the box
 function handleClick(e) {
     const targetCell = e.target
     if (xTurn) {
@@ -97,7 +84,7 @@ const winnigArr = [
     [0, 4, 8], [2, 4, 6]
 ]
 
-
+// checks the winner 'x' or 'o'
 function checkWinner(arg) {
     winnigArr.forEach(element => {
         let arr = []
@@ -108,31 +95,34 @@ function checkWinner(arg) {
             if (arr.length === 3) {
                 results.innerHTML = arg.toUpperCase() + ' wins!'
                 resultMessage.style.display = 'block'
-
             }
-            // else if (containsClass(checkCell)) {
-            //     results.innerHTML = "Match Tie!";
-            //     resultMessage.style.display = 'block'
-            // }
         })
     })
-    // if (containsClass(checkCell)) {
-    //     results.innerHTML = "Match Tie!";
-    //     resultMessage.style.display = 'block'
-    // }
 }
 
+// checks if it is draw
 function containsClass(argument) {
-    return [...argument].every(cell => {
-        return cell.classList.contains('x') ||
-            cell.classList.contains('o')
-    })
-   
+    // return [...argument].every(cell => {
+    //     return cell.classList.contains('x') ||
+    //         cell.classList.contains('o')
+    // })
+
+    let count = 0
+    for (let i = 0; i < argument.length; i++) {
+        if (argument[i].classList.contains('x') ||
+            argument[i].classList.contains('o')) {
+            count = count + 1
+        }
+    }
+    if (count === 9) {
+        results.innerHTML = "Match Tie!";
+        resultMessage.style.display = 'block'
+    }
 }
 
 
 restartBtn.addEventListener('click', function () {
-   window.open('index.html')
+    window.open('index.html')
 })
 
 closeBtn.addEventListener('click', function () {
@@ -143,7 +133,6 @@ closeBtn.addEventListener('click', function () {
 })
 
 resetBtn.addEventListener('click', function () {
-   // gameBoard.style.display = 'block'
     resultMessage.style.display = 'none'
     xTurn = true;
     removeClasses();
