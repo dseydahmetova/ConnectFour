@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>ConnectFour</title>
+    <title>GameProject</title>
 </head>
 
 <body>
@@ -27,24 +27,39 @@
         <button id='resetBtn'>Reset</button>
         <button id='restartBtn'>Start New Game</button>
     </div>
+
+
+
+   
+
     <div id="popup">
-        <img src="/images/logoconnect.PNG" alt="logo">
+        <div><h1>Choose the Game</h1></div>
+        <!-- <img src="/images/logoconnect.PNG" alt="logo">
+        <img src="/images/logotictactoe.png" alt="logo"> -->
+       
         <div class="input">
             <label for="player1Name">Player 1
                 <input class="input" id="player1Name" type="text" />
             </label>
-            <label for="player2Namet">Player 2
+            <label for="player2Name">Player 2
                 <input class="input" id="player2Name" type="text" />
             </label>
         </div>
-        <p id="errors"></p>
-        <button id='startBtn'>Start Game</button>
+        <div id = "gameOptions">
+            <p id="errors"></p>
+            <!-- <a href="/tictactoe.html" target="_blank"><input type="button" value="Open File" /></a> -->
+            <button id="tictactoe" class = "gameBtn">TicTacToe</button>
+            <button id="connectfour" class = "gameBtn">Connect Four</button>
+        </div>
+        
     </div>
     <div class="result-message">
         <div class="finalresults"></div>
         <button id='closeBtn'>Close</button>
     </div>
-    <script src="app.js" defer></script>
+   
+    <script src="connectfour.js" defer></script>
+    <!-- <script src="tictac.js" defer></script> -->
 </body>
 
 </html>
