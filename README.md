@@ -28,11 +28,17 @@ git commit
 - have fun
 
 **Screenshots:**
-![welcome page of the game](https://github.com/dseydahmetova/ConnectFour/blob/main/images/welcomepage.PNG?raw=true)
 
+* welcome page of the game
+![welcome page of the game](https://github.com/dseydahmetova/ConnectFour/blob/main/images/welcomepage.PNG?raw=true)
+ 
+* Tic-Tac-Toe
 ![tictactoe](https://github.com/dseydahmetova/ConnectFour/blob/main/images/tictactoe.PNG?raw=true)
+
+* Tic-Tac-Toe results
 ![tictactoeresult](https://github.com/dseydahmetova/ConnectFour/blob/main/images/tictactoeresult.PNG?raw=true)
 
+* Connect Four
 ![connectfour](https://github.com/dseydahmetova/ConnectFour/blob/main/images/connectfourresult.PNG?raw=true)
 
 
