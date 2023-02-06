@@ -36,10 +36,6 @@ img {
 .gameBtn{
 margin: 20px;
 width: 300px;
-/* font-weight: bold; */
-/* font-family: Georgia, 'Times New Roman', Times, serif;; */
-
-
 }
 
 #gameBoard {
@@ -164,11 +160,6 @@ button:hover {
     outline: 3px solid transparent;
 }
 
-/* .results {
-    color: rgb(204, 41, 12);
-    margin: 0 auto;
-} */
-
 #errors {
     color: red;
     font-weight: bold;
@@ -181,7 +172,6 @@ label {
     font-weight: bold;
 }
 
-/* // End screen style */
 .result-message {
     background: rgba(0, 0, 0, 0.9);
     display: none;
@@ -197,40 +187,6 @@ label {
     bottom: 0;
     text-align: center;
 }
-
-
-
-
-/* :root {
-    --size: 140px;
-}
-
-body {
-    background-color: #e9f2fd;
-    font-family: 'Ink free', Georgia, 'Times New Roman', Times, serif;
-}
-
-h1 {
-    text-align: center;
-    color: navy;
-    font-size: 45px;
-}
-
-img {
-    width: 200px;
-    height: 150px;
-    text-align: center;
-}
-
-#gameBoard {
-    text-align: center;
-}
-
-.game {
-    display: flex;
-    justify-content: space-around;
-}
-*/
 
 #container2 {
     display: grid;
@@ -276,63 +232,3 @@ img {
     padding: 10px;
     margin: 50px;
 }
-/*
-button:hover {
-    background-color: #1e919a;
-    color: white;
-}
-
-#popup {
-    position: absolute;
-    display: hidden;
-    text-align: center;
-    top: 100px;
-    left: 40%;
-    width: 700px;
-    height: 550px;
-    margin-left: -250px;
-    border: 5px solid lightblue;
-    border-radius: 10px;
-    background-color: rgb(246, 251, 252);
-}
-
-.input {
-    font-size: 16px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    padding: 1.25em 0.5em;
-    background-color: rgb(246, 251, 252);
-    border-radius: 6px;
-    display: flex;
-    justify-content: space-around;
-}
-
-.input:focus {
-    outline: 3px solid transparent;
-}
-
-#errors {
-    color: red;
-}
-
-label {
-    font-size: 20px;
-    font-weight: bold;
-}
-
-
-/* // End screen style */
-/* .result-message {
-    background: rgba(0, 0, 0, 0.9);
-    display: none;
-    padding-top: 250px;
-    display: flex;
-    flex-direction: column;
-    color: white;
-    font-size: 5rem;
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    text-align: center;
-}  */
