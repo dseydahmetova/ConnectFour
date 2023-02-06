@@ -1,23 +1,24 @@
 # Connect Four and Tic-Tac-Toe
 
-Web version of Connect 4 game with a player versus player option
-A Project made for educational purposes while studying in PerScholas bootcamp
+Web version of Connect 4 and Tic-Tac-Toe. Game with a player versus player option.
 
-## Programming Language : `HTML, CSS, Vanilla Java Script`
+A Project made for educational purposes while studying in PerScholas bootcamp.
 
-# Built with: `Visual Studio`
+This is a Tic Tac Toe and Connect Four Game build based on my own design, it start with a pop up window asking for players information so they can start the game, give it a try I'm sure you will like it :+1:
+
+### Programming Language : `HTML, CSS, Vanilla Java Script`
+
+#### Built with: `Visual Studio`
 
 ### Live Demo: https://dseydahmetova.github.io/ConnectFour/
 
-### code style: standard. Some used basic Git commands:
+### Some used basic Git commands:
 
 ```
 git status
 git add
 git commit
 ```
-
-This is a Tic Tac Toe and Connect Four Game build based on my own design, it start with a pop up window asking for players information so they can start the game, give it a try I'm sure you will like it :+1:
 
 **Instructions:**
 - Enter players name, then choose the game
